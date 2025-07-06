@@ -5,209 +5,219 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Momentos Axel en Burbujas</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Nunito', sans-serif;
-    }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Nunito', sans-serif;
+}
 
-    body {
-      display: flex;
-      min-height: 100vh;
-      overflow-x: hidden;
-      background: url('https://static.vecteezy.com/system/resources/previews/007/773/889/non_2x/ocean-water-splash-on-rock-beach-with-beautiful-sunset-sky-and-clouds-sea-wave-splashing-on-stone-at-sea-shore-on-summer-nature-landscape-tropical-paradise-beach-at-sunset-rock-beach-at-coast-free-photo.jpg') no-repeat center/cover;
-    }
+html, body {
+  height: 100%;
+  background: url('https://static.vecteezy.com/system/resources/previews/007/773/889/non_2x/ocean-water-splash-on-rock-beach-with-beautiful-sunset-sky-and-clouds-sea-wave-splashing-on-stone-at-sea-shore-on-summer-nature-landscape-tropical-paradise-beach-at-sunset-rock-beach-at-coast-free-photo.jpg') no-repeat center/cover;
+  overflow-x: hidden;
+}
 
-    /* 🧊 BARRA LATERAL */
-    .sidebar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 60px;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.8);
-      transition: width 0.3s;
-      padding-top: 60px;
-      z-index: 999;
-      opacity: .8;
-    }
+/* 🧊 BARRA LATERAL */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 60px;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  transition: width 0.3s, opacity 0.3s;
+  padding-top: 60px;
+  z-index: 999;
+  opacity: 0.8;
+}
 
-    .sidebar:hover {
-      width: 200px;
-      opacity: .5;
-    }
+.sidebar:hover {
+  width: 200px;
+  opacity: 0.5;
+}
 
-    .item {
-      color: white;
-      padding: 15px 10px;
-      display: flex;
-      align-items: center;
-      transition: background 0.3s;
-      cursor: pointer;
-    }
+.item {
+  color: white;
+  padding: 15px 10px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: background 0.3s;
+}
 
-    .item:hover {
-      background-color: #222;
-    }
+.item:hover {
+  background-color: #222;
+}
 
-    .icon {
-      font-size: 1.2rem;
-      margin-right: 10px;
-      width: 30px;
-      text-align: center;
-    }
+.icon {
+  font-size: 1.2rem;
+  margin-right: 10px;
+  width: 30px;
+  text-align: center;
+}
 
-    .text {
-      display: none;
-      white-space: nowrap;
-    }
+.text {
+  display: none;
+  white-space: nowrap;
+}
 
-    .sidebar:hover .text {
-      display: inline;
-    }
+.sidebar:hover .text {
+  display: inline;
+}
 
-    /* 💎 CONTENIDO PRINCIPAL */
-    .main {
-      flex: 1;
-      margin-left: 60px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 20px;
-      transition: margin-left 0.3s;
-    }
+/* 💎 CONTENIDO PRINCIPAL */
+body {
+  display: flex;
+  flex-direction: column;
+  margin-left: 60px;
+  transition: margin-left 0.3s;
+  min-height: 100vh;
+}
 
-    .sidebar:hover ~ .main {
-      margin-left: 200px;
-    }
+.sidebar:hover ~ body {
+  margin-left: 200px;
+}
 
-    h1 {
-      color: white;
-      font-size: 2.5rem;
-      margin: 40px 0 20px;
-      text-shadow: 2px 2px 5px black;
-      text-align: center;
-    }
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
 
-    .burbujas {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: center;
-      gap: 20px;
-      width: 100%;
-      max-width: 1200px;
-      
-    }
+h1 {
+  color: white;
+  font-size: 2.5rem;
+  margin: 40px 0 20px;
+  text-shadow: 2px 2px 5px black;
+  text-align: center;
+}
 
-    .burbuja {
-      position: relative;
-      width: 150px;
-      height: 150px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.15);
-      border: 2px solid rgba(37, 23, 23, .8);
-      color: white;
-      font-weight: bold;
-      text-align: center;
-      text-shadow: 1px 1px 2px rgb(198, 51, 51);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      overflow: hidden;
-      transition: all 0.4s ease;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.7);
-      z-index: 1;
-    }
+.burbujas {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  max-width: 1200px;
+}
 
-    .burbuja::before {
-      content: attr(data-text);
-      z-index: 2;
-      padding: 10px;
-      transition: opacity 0.4s ease;
-    }
+.burbuja {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  border: 2px solid rgba(37, 23, 23, 0.8);
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  text-shadow: 1px 1px 2px rgb(198, 51, 51);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.4s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.7);
+  z-index: 1;
+}
 
-    .burbuja:hover::before {
-      opacity: 0;
-    }
+.burbuja::before {
+  content: attr(data-text);
+  z-index: 2;
+  padding: 10px;
+  transition: opacity 0.4s ease;
+}
 
-    .burbuja:hover {
-      transform: scale(1.8);
-      color: transparent;
-      background-size: cover !important;
-      background-position: center !important;
-      z-index: 10;
-    }
+.burbuja:hover::before {
+  opacity: 0;
+}
 
-    @keyframes flotar {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-50px); }
-    }
+.burbuja:hover {
+  transform: scale(1.8);
+  color: transparent;
+  background-size: cover !important;
+  background-position: center !important;
+  z-index: 10;
+   width: 300px; height: 400px;
+}
 
-    @keyframes latir {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.2); }
-    }
+/* 🔁 Animaciones */
+@keyframes flotar {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-50px); }
+}
 
-    @keyframes diagonalGiro {
-      0% { transform: translate(0, 0) rotate(0deg); }
-      50% { transform: translate(30px, -15px) rotate(50deg); }
-      100% { transform: translate(0, 0) rotate(20deg); }
-    }
+@keyframes latir {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
 
-    .burbuja:nth-child(1) { animation: flotar 6s ease-in-out infinite; }
-    .burbuja:nth-child(2) { animation: latir 4s ease-in-out infinite; }
-    .burbuja:nth-child(3) { animation: flotar 5s ease-in-out infinite; }
-    .burbuja:nth-child(4) { animation: diagonalGiro 8s linear infinite; }
-    .burbuja:nth-child(5) { animation: flotar 6s ease-in-out infinite; }
-    .burbuja:nth-child(6) { animation: flotar 8s ease-in-out infinite; }
-    .burbuja:nth-child(7) { animation: diagonalGiro 7s ease-in-out infinite; }
-    .burbuja:nth-child(8) { animation: diagonalGiro 5s linear infinite; }
-    .burbuja:nth-child(9) { animation: latir 5s ease-in-out infinite; }
-    .burbuja:nth-child(10) { animation: flotar 6s ease-in-out infinite; }
-    .burbuja:nth-child(11) { animation: diagonalGiro 10s linear infinite; }
-    .burbuja:nth-child(12) { animation: latir 4s ease-in-out infinite; }
+@keyframes diagonalGiro {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  50% { transform: translate(30px, -15px) rotate(50deg); }
+  100% { transform: translate(0, 0) rotate(20deg); }
+}
 
-    .burbuja:nth-child(1):hover { background-image: url('./2017-03-17 17.01.34.jpg'); }
-    .burbuja:nth-child(2):hover { background-image: url('./2017-03-28 02.40.35.jpg'); }
-    .burbuja:nth-child(3):hover { background-image: url('./20181120_195918.jpg'); }
-    .burbuja:nth-child(4):hover { background-image: url('./20190413_171010.jpg'); }
-    .burbuja:nth-child(5):hover { background-image: url('./20190413_171116.jpg'); }
-    .burbuja:nth-child(6):hover { background-image: url('./20190414_140801.jpg'); }
-    .burbuja:nth-child(7):hover { background-image: url('./Imagen de WhatsApp 2025-05-17 a las 10.21.55_f3fae0e1.jpg'); }
-    .burbuja:nth-child(8):hover { background-image: url('./Imagen de WhatsApp 2025-05-17 a las 10.24.37_2bbc2223.jpg'); }
-    .burbuja:nth-child(9):hover { background-image: url('Imagen de WhatsApp 2025-06-22 a las 15.32.48_f77871b9.jpg'); }
-    .burbuja:nth-child(10):hover { background-image: url('IMG-20191029-WA0023.jpg'); }
-    .burbuja:nth-child(11):hover { background-image: url('./PHOTO_20170523_145547.jpg'); }
-    .burbuja:nth-child(12):hover { background-image: url('IMG-20200305-WA0026.jpg'); }
+/* 🎯 Asignar animaciones a burbujas */
+.burbuja:nth-child(1) { animation: flotar 6s ease-in-out infinite; }
+.burbuja:nth-child(2) { animation: latir 4s ease-in-out infinite; }
+.burbuja:nth-child(3) { animation: flotar 5s ease-in-out infinite; }
+.burbuja:nth-child(4) { animation: diagonalGiro 8s linear infinite; }
+.burbuja:nth-child(5) { animation: flotar 6s ease-in-out infinite; }
+.burbuja:nth-child(6) { animation: flotar 8s ease-in-out infinite; }
+.burbuja:nth-child(7) { animation: diagonalGiro 7s ease-in-out infinite; }
+.burbuja:nth-child(8) { animation: diagonalGiro 5s linear infinite; }
+.burbuja:nth-child(9) { animation: latir 5s ease-in-out infinite; }
+.burbuja:nth-child(10) { animation: flotar 6s ease-in-out infinite; }
+.burbuja:nth-child(11) { animation: diagonalGiro 10s linear infinite; }
+.burbuja:nth-child(12) { animation: latir 4s ease-in-out infinite; }
 
-    footer {
-      background-color: black;
-      color: white;
-      text-align: center;
-      padding: 20px;
-      font-size: 0.9rem;
-      margin-top: 40px;
-      width: 100%;
-      
-    }
+/* 🖼️ Imágenes al hacer hover */
+.burbuja:nth-child(1):hover { background-image: url('./2017-03-17 17.01.34.jpg'); }
+.burbuja:nth-child(2):hover { background-image: url('./2017-03-28 02.40.35.jpg'); }
+.burbuja:nth-child(3):hover { background-image: url('./20181120_195918.jpg'); }
+.burbuja:nth-child(4):hover { background-image: url('./20190413_171010.jpg'); }
+.burbuja:nth-child(5):hover { background-image: url('./20190413_171116.jpg'); }
+.burbuja:nth-child(6):hover { background-image: url('./20190414_140801.jpg'); }
+.burbuja:nth-child(7):hover { background-image: url('./Imagen de WhatsApp 2025-05-17 a las 10.21.55_f3fae0e1.jpg'); }
+.burbuja:nth-child(8):hover { background-image: url('./Imagen de WhatsApp 2025-05-17 a las 10.24.37_2bbc2223.jpg'); }
+.burbuja:nth-child(9):hover { background-image: url('Imagen de WhatsApp 2025-06-22 a las 15.32.48_f77871b9.jpg'); }
+.burbuja:nth-child(10):hover { background-image: url('IMG-20191029-WA0023.jpg'); }
+.burbuja:nth-child(11):hover { background-image: url('./PHOTO_20170523_145547.jpg'); }
+.burbuja:nth-child(12):hover { background-image: url('IMG-20200305-WA0026.jpg'); }
 
-    @media (max-width: 600px) {
-      .burbuja {
-        width: 100px;
-        height: 100px;
-      }
+/* 📌 FOOTER */
+footer {
+  background-color: black;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  font-size: 0.9rem;
+  width: 100%;
+}
 
-      .burbuja:hover {
-        transform: scale(1.2);
-      }
+/* 📱 Responsive para móviles */
+@media (max-width: 600px) {
+  .burbuja {
+    width: 100px;
+    height: 100px;
+  }
 
-      .burbujas {
-        gap: 10px;
-      }
-    }
+  .burbuja:hover {
+    transform: scale(1.5);
+     width: 300px; height: 400px;
+  }
+
+  .burbujas {
+    gap: 10px;
+  }
+}
+
   </style>
 </head>
 <body>
