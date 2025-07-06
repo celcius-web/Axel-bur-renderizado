@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Momentos Axel en Burbujas</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Nunito', sans-serif;
+    }
+
+    body {
+      display: flex;
+      min-height: 100vh;
+      overflow-x: hidden;
+      background: url('https://static.vecteezy.com/system/resources/previews/007/773/889/non_2x/ocean-water-splash-on-rock-beach-with-beautiful-sunset-sky-and-clouds-sea-wave-splashing-on-stone-at-sea-shore-on-summer-nature-landscape-tropical-paradise-beach-at-sunset-rock-beach-at-coast-free-photo.jpg') no-repeat center/cover;
+    }
+
+    /* 🧊 BARRA LATERAL */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 60px;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      transition: width 0.3s;
+      padding-top: 60px;
+      z-index: 999;
+      opacity: .8;
+    }
+
+    .sidebar:hover {
+      width: 200px;
+      opacity: .5;
+    }
+
+    .item {
+      color: white;
+      padding: 15px 10px;
+      display: flex;
+      align-items: center;
+      transition: background 0.3s;
+      cursor: pointer;
+    }
+
+    .item:hover {
+      background-color: #222;
+    }
+
+    .icon {
+      font-size: 1.2rem;
+      margin-right: 10px;
+      width: 30px;
+      text-align: center;
+    }
+
+    .text {
+      display: none;
+      white-space: nowrap;
+    }
+
+    .sidebar:hover .text {
+      display: inline;
+    }
+
+    /* 💎 CONTENIDO PRINCIPAL */
+    .main {
+      flex: 1;
+      margin-left: 60px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      transition: margin-left 0.3s;
+    }
+
+    .sidebar:hover ~ .main {
+      margin-left: 200px;
+    }
+
+    h1 {
+      color: white;
+      font-size: 2.5rem;
+      margin: 40px 0 20px;
+      text-shadow: 2px 2px 5px black;
+      text-align: center;
+    }
+
+    .burbujas {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      width: 100%;
+      max-width: 1200px;
+      
+    }
+
+    .burbuja {
+      position: relative;
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.15);
+      border: 2px solid rgba(37, 23, 23, .8);
+      color: white;
+      font-weight: bold;
+      text-align: center;
+      text-shadow: 1px 1px 2px rgb(198, 51, 51);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      overflow: hidden;
+      transition: all 0.4s ease;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.7);
+      z-index: 1;
+    }
+
+    .burbuja::before {
+      content: attr(data-text);
+      z-index: 2;
+      padding: 10px;
+      transition: opacity 0.4s ease;
+    }
+
+    .burbuja:hover::before {
+      opacity: 0;
+    }
+
+    .burbuja:hover {
+      transform: scale(1.8);
+      color: transparent;
+      background-size: cover !important;
+      background-position: center !important;
+      z-index: 10;
+    }
+
+    @keyframes flotar {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-50px); }
+    }
+
+    @keyframes latir {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+    }
+
+    @keyframes diagonalGiro {
+      0% { transform: translate(0, 0) rotate(0deg); }
+      50% { transform: translate(30px, -15px) rotate(50deg); }
+      100% { transform: translate(0, 0) rotate(20deg); }
+    }
+
+    .burbuja:nth-child(1) { animation: flotar 6s ease-in-out infinite; }
+    .burbuja:nth-child(2) { animation: latir 4s ease-in-out infinite; }
+    .burbuja:nth-child(3) { animation: flotar 5s ease-in-out infinite; }
+    .burbuja:nth-child(4) { animation: diagonalGiro 8s linear infinite; }
+    .burbuja:nth-child(5) { animation: flotar 6s ease-in-out infinite; }
+    .burbuja:nth-child(6) { animation: flotar 8s ease-in-out infinite; }
+    .burbuja:nth-child(7) { animation: diagonalGiro 7s ease-in-out infinite; }
+    .burbuja:nth-child(8) { animation: diagonalGiro 5s linear infinite; }
+    .burbuja:nth-child(9) { animation: latir 5s ease-in-out infinite; }
+    .burbuja:nth-child(10) { animation: flotar 6s ease-in-out infinite; }
+    .burbuja:nth-child(11) { animation: diagonalGiro 10s linear infinite; }
+    .burbuja:nth-child(12) { animation: latir 4s ease-in-out infinite; }
+
+    .burbuja:nth-child(1):hover { background-image: url('./2017-03-17 17.01.34.jpg'); }
+    .burbuja:nth-child(2):hover { background-image: url('./2017-03-28 02.40.35.jpg'); }
+    .burbuja:nth-child(3):hover { background-image: url('./20181120_195918.jpg'); }
+    .burbuja:nth-child(4):hover { background-image: url('./20190413_171010.jpg'); }
+    .burbuja:nth-child(5):hover { background-image: url('./20190413_171116.jpg'); }
+    .burbuja:nth-child(6):hover { background-image: url('./20190414_140801.jpg'); }
+    .burbuja:nth-child(7):hover { background-image: url('./Imagen de WhatsApp 2025-05-17 a las 10.21.55_f3fae0e1.jpg'); }
+    .burbuja:nth-child(8):hover { background-image: url('./Imagen de WhatsApp 2025-05-17 a las 10.24.37_2bbc2223.jpg'); }
+    .burbuja:nth-child(9):hover { background-image: url('Imagen de WhatsApp 2025-06-22 a las 15.32.48_f77871b9.jpg'); }
+    .burbuja:nth-child(10):hover { background-image: url('IMG-20191029-WA0023.jpg'); }
+    .burbuja:nth-child(11):hover { background-image: url('./PHOTO_20170523_145547.jpg'); }
+    .burbuja:nth-child(12):hover { background-image: url('IMG-20200305-WA0026.jpg'); }
+
+    footer {
+      background-color: black;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9rem;
+      margin-top: 40px;
+      width: 100%;
+      
+    }
+
+    @media (max-width: 600px) {
+      .burbuja {
+        width: 100px;
+        height: 100px;
+      }
+
+      .burbuja:hover {
+        transform: scale(1.2);
+      }
+
+      .burbujas {
+        gap: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="sidebar">
+    <div class="item"><span class="icon">🏠</span><span class="text">Inicio</span></div>
+    <div class="item"><span class="icon">👦</span><span class="text">Perfil</span></div>
+    <div class="item"><span class="icon">⚙️</span><span class="text">Configuración</span></div>
+    <div class="item"><span class="icon">❤️</span><span class="text">Celes para Axel</span></div>
+  </div>
+
+  <div class="main">
+    <h1>Momentos Axel en burbujas</h1>
+
+    <section class="burbujas">
+      <div class="burbuja" data-text="Tenías 18 meses"></div>
+      <div class="burbuja" data-text="Primera foto, a los 2 meses"></div>
+      <div class="burbuja" data-text="En Puebla, 20/nov/18"></div>
+      <div class="burbuja" data-text="Tu bautizo, 13/abril/2018"></div>
+      <div class="burbuja" data-text="Otra del bautizo"></div>
+      <div class="burbuja" data-text="Después del bautizo, 14/abril/2018"></div>
+      <div class="burbuja" data-text="Tu bailable, 2025"></div>
+      <div class="burbuja" data-text="En San Lucas Teteletitlán, 2025"></div>
+      <div class="burbuja" data-text="En Tehuacán, 2025"></div>
+      <div class="burbuja" data-text="En Loma Cajón, 28/oct/2019"></div>
+      <div class="burbuja" data-text="Tus travesuras, nov/2018"></div>
+      <div class="burbuja" data-text="Infancia Axel Yahir"></div>
+    </section>
+
+    <footer>
+      Creado por Celes Domínguez — 04/julio/2025<br>Prácticas de Desarrollo de Software
+    </footer>
+  </div>
+</body>
+</html>
